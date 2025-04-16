@@ -1,0 +1,29 @@
+/* menu.css */
+.nav-container {
+    @apply fixed w-full z-50 bg-gray-900 shadow-lg text-white;
+}
+
+.nav-link {
+    @apply relative px-3 py-2 text-sm font-medium;
+}
+
+.nav-link span {
+    @apply relative block;
+}
+
+.nav-link .underline {
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300;
+}
+
+.nav-brand {
+    @apply text-2xl font-bold text-blue-600;
+}
+
+.nav-brand span {
+    @apply text-xl font-bold text-purple-400;
+}
+
+/* Animation du trait */
+.nav-link:hover .underline {
+    transform: scaleX(1);
+}

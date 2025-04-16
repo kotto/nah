@@ -1,0 +1,23 @@
+/* Styles personnalisés pour les cartes de services sur la page Sion Aviation */
+/* Ciblage spécifique pour éviter d'affecter d'autres éléments */
+
+/* Cartes de services dans la section Services */
+.grid.md\:grid-cols-2.lg\:grid-cols-3.gap-8 .bg-white.rounded-xl {
+    background-color: white !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Fond des cartes de services */
+.grid.md\:grid-cols-2.lg\:grid-cols-3.gap-8 .h-48.bg-gradient-to-r {
+    background: linear-gradient(to right, #581c87, #7e22ce) !important;
+}
+
+/* Assurer que les icônes sont bien visibles */
+.grid.md\:grid-cols-2.lg\:grid-cols-3.gap-8 .text-white {
+    color: white !important;
+}
+
+/* Améliorer la visibilité des images de fond */
+.grid.md\:grid-cols-2.lg\:grid-cols-3.gap-8 .opacity-20 {
+    opacity: 0.2 !important;
+}

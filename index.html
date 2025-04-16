@@ -3,143 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nebula Nexus | Immersive Digital Experiences</title>
+    <title>NEPHTALI AWE HOLDING - Diversified Conglomerate</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="file:///f:/eric/zad/menu.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #1a365d;
+            --secondary: #1c64f2;
+            --accent: #3b82f6;
         }
         
         body {
-            overflow-x: hidden;
             font-family: 'Poppins', sans-serif;
-            background-color: #0a0a12;
-            color: #f1f1f3;
+            scroll-behavior: smooth;
+            background-color: #f8fafc;
         }
         
-        .tech-font {
-            font-family: 'Orbitron', sans-serif;
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #3b82f6 100%);
         }
         
-        .hero-section {
-            height: 100vh;
-            position: relative;
-        }
-        
-        .particle-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        
-        .gradient-text {
-            background: linear-gradient(90deg, #00f0ff, #5773ff, #ff007a);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .gradient-border {
-            position: relative;
-        }
-        
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            z-index: -1;
-            background: linear-gradient(90deg, #00f0ff, #5773ff, #ff007a);
-            border-radius: inherit;
-            padding: 2px;
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-        }
-        
-        .floating {
-            animation: floating 8s ease-in-out infinite;
-        }
-        
-        .floating-2 {
-            animation: floating 6s ease-in-out infinite 2s;
-        }
-        
-        .floating-3 {
-            animation: floating 7s ease-in-out infinite 1s;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(5deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
-        }
-        
-        .holographic {
-            background: linear-gradient(135deg, rgba(0,240,255,0.1) 0%, rgba(87,115,255,0.1) 50%, rgba(255,0,122,0.1) 100%);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .neon-glow {
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 240, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
-        }
-        
-        .rotate-x {
-            animation: rotate-x 20s infinite linear;
+        .company-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            perspective: 1000px;
             transform-style: preserve-3d;
         }
         
-        @keyframes rotate-x {
-            0% { transform: rotateX(0deg); }
-            100% { transform: rotateX(360deg); }
+        .company-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
         }
         
-        .space-helmet {
-            perspective: 1000px;
+        .company-card .card-front {
+            backface-visibility: hidden;
+            transform: rotateY(0deg);
         }
         
-        .helmet-visor {
-            background: linear-gradient(45deg, rgba(0,240,255,0.2), rgba(87,115,255,0.4));
-            box-shadow: inset 0 0 50px rgba(0,240,255,0.5);
-            border-radius: 50%;
-            filter: blur(0.5px);
-        }
-        
+        /* Style pour le menu de navigation */
         .nav-link {
             position: relative;
+            transition: all 0.3s ease;
         }
         
         .nav-link::after {
             content: '';
             position: absolute;
+            bottom: -4px;
+            left: 0;
             width: 0;
             height: 2px;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(90deg, #00f0ff, #5773ff, #ff007a);
+            background: linear-gradient(90deg, #3b82f6, #1c64f2);
             transition: width 0.3s ease;
         }
         
@@ -147,311 +65,271 @@
             width: 100%;
         }
         
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
+        .active {
+            color: var(--secondary);
+            font-weight: 500;
         }
         
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0) translateX(-50%);
-            }
-            40% {
-                transform: translateY(-20px) translateX(-50%);
-            }
-            60% {
-                transform: translateY(-10px) translateX(-50%);
-            }
+        .active:after {
+            width: 100%;
         }
         
-        .feature-panel {
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.6s ease-out;
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            background-size: 200% auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
-        .feature-panel.visible {
-            transform: translateY(0);
-            opacity: 1;
+        .btn-gradient:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .hologram-effect {
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .section-title {
             position: relative;
+            display: inline-block;
         }
         
-        .hologram-effect::before {
+        .section-title:after {
             content: '';
             position: absolute;
+            width: 60%;
+            height: 4px;
             bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(to bottom, rgba(0,240,255,0.3), transparent);
-            transform: perspective(500px) rotateX(60deg) scaleY(0.8);
-            filter: blur(15px);
-            z-index: -1;
+            left: 20%;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            border-radius: 2px;
         }
         
-        .scanline {
-            position: relative;
-            overflow: hidden;
+        .input-field {
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
         }
         
-        .scanline::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                transparent 0%,
-                rgba(0, 240, 255, 0.03) 50%,
-                transparent 100%
-            );
-            animation: scanline 5s linear infinite;
-            pointer-events: none;
+        .input-field:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
         
-        @keyframes scanline {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
+        .hover-scale {
+            transition: transform 0.3s ease;
         }
         
-        /* Floating 3D Shapes */
-        .floating-cube {
-            animation: floating 8s ease-in-out infinite, rotate-x 20s infinite linear;
-            transform-style: preserve-3d;
+        .hover-scale:hover {
+            transform: scale(1.05);
         }
         
-        .floating-pyramid {
-            animation: floating 7s ease-in-out infinite 1s, rotate-y 25s infinite linear reverse;
-            transform-style: preserve-3d;
-        }
-        
-        .floating-torus {
-            animation: floating 9s ease-in-out infinite 2s, rotate-x 30s infinite linear reverse;
-            transform-style: preserve-3d;
-        }
-        
-        @keyframes rotate-y {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
-        }
-        
-        .noise::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-            z-index: -1;
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     </style>
 </head>
-<body>
-    <!-- Background Animation -->
-    <div id="vanta-bg" class="particle-bg"></div>
-    
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-black bg-opacity-60 backdrop-filter backdrop-blur-lg border-b border-gray-800">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50">
+    <!-- Navigation - Improved with better spacing and visual hierarchy -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="text-2xl font-bold gradient-text tech-font">NEBULA NEXUS</span>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-center space-x-8">
-                        <a href="#" class="nav-link px-3 py-2 text-sm font-medium">Home</a>
-                        <a href="#features" class="nav-link px-3 py-2 text-sm font-medium">Tech</a>
-                        <a href="#portfolio" class="nav-link px-3 py-2 text-sm font-medium">Work</a>
-                        <a href="#pricing" class="nav-link px-3 py-2 text-sm font-medium">Plans</a>
-                        <a href="#contact" class="nav-link px-3 py-2 text-sm font-medium">Contact</a>
+            <div class="flex justify-between h-20">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="text-2xl font-bold text-blue-600">NEPHTALI AWE <span class="text-xl font-bold text-purple-400">HOLDING</span></a>
                     </div>
                 </div>
-                <div class="flex items-center">
-                    <button class="relative overflow-hidden group bg-transparent border-2 border-blue-400 hover:border-purple-500 text-white px-6 py-2 rounded-full font-medium transition-all duration-500">
-                        <span class="relative z-10">Launch App</span>
-                        <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-all duration-500"></span>
+                <div class="hidden md:ml-6 md:flex md:space-x-8">
+                    <a href="#home" class="nav-link inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300">Home</a>
+                    <a href="#about" class="nav-link inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300">About</a>
+                    <a href="#companies" class="nav-link inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300">Companies</a>
+                    <a href="#contact" class="nav-link inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors duration-300">Contact</a>
+                    <a href="#contact" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition">
+                        <i class="fas fa-phone-alt mr-2"></i> Get in Touch
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="text-gray-700 hover:text-blue-600 focus:outline-none transition">
+                        <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md pb-3 px-2 shadow-lg">
+            <a href="#home" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition">Home</a>
+            <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition">About</a>
+            <a href="#companies" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition">Companies</a>
+            <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-md transition">Contact</a>
+            <div class="mt-3 px-3">
+                <a href="#contact" class="block text-center w-full px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition">
+                    <i class="fas fa-phone-alt mr-2"></i> Get in Touch
+                </a>
             </div>
         </div>
     </nav>
     
-    <!-- Hero Section with 3D Model -->
-    <section class="hero-section flex items-center justify-center relative overflow-hidden px-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="text-center lg:text-left">
-                <div class="relative inline-block mb-8">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-400 to-purple-600 rounded-xl blur opacity-75"></div>
-                    <span class="relative px-4 py-2 bg-black rounded-lg text-sm font-medium tech-font">
-                        FUTURE OF DIGITAL EXPERIENCE
-                    </span>
-                </div>
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tech-font">
-                    <span class="gradient-text">Beyond Reality</span> Digital Frontiers
-                </h1>
-                <p class="text-xl text-gray-300 max-w-2xl mb-10">
-                    We blend cutting-edge technology with immersive design to create experiences that transcend traditional boundaries.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <button class="relative overflow-hidden group px-8 py-4 rounded-full font-medium text-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105">
-                        <span class="relative z-10">Explore Demos</span>
-                        <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-all duration-500"></span>
-                    </button>
-                    <button class="px-8 py-4 rounded-full font-medium text-lg border-2 border-blue-400 hover:border-purple-500 text-white hover:text-blue-200 transition-all duration-300 transform hover:scale-105">
-                        <i class="fas fa-play mr-2"></i> Watch Showreel
-                    </button>
-                </div>
+    <!-- Spacer to prevent content from being hidden under fixed navbar -->
+    <div class="h-20"></div>
+
+    <!-- Hero Section - Completely redesigned with modern layout -->
+    <section id="home" class="hero-gradient pt-32 pb-24 text-white relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute inset-0 bg-black/20 z-10"></div>
+            <div class="absolute top-0 right-0 w-full h-full">
+                <div class="absolute top-1/4 -right-20 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl opacity-20"></div>
+                <div class="absolute top-1/2 left-1/4 w-80 h-80 bg-indigo-500 rounded-full filter blur-3xl opacity-20"></div>
+                <div class="absolute bottom-1/4 -left-20 w-96 h-96 bg-blue-400 rounded-full filter blur-3xl opacity-20"></div>
             </div>
-            
-            <!-- 3D Holographic Display -->
-            <div class="relative flex items-center justify-center h-96 lg:h-auto">
-                <div class="absolute w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
-                    <div class="floating-torus h-full w-full">
-                        <!-- Three.js will render here -->
-                        <canvas id="torusCanvas" class="h-full w-full"></canvas>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+            <div class="md:flex items-center justify-between">
+                <div class="md:w-1/2 mb-12 md:mb-0" data-aos="fade-right">
+                    <div class="inline-block px-3 py-1 rounded-full bg-blue-500/20 border border-blue-300/30 text-blue-100 text-sm font-medium mb-6">
+                        Global Conglomerate
                     </div>
-                </div>
-                
-                <div class="holographic h-64 w-64 md:h-80 md:w-80 lg:h-96 lg:w-96 rounded-full opacity-90 relative">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="helmet-visor h-3/4 w-3/4 flex items-center justify-center">
-                            <div class="text-center p-6">
-                                <h3 class="text-2xl font-bold mb-2 gradient-text tech-font">NEBULA NEXUS</h3>
-                                <p class="text-xs text-gray-300">IMMERSIVE TECH</p>
-                                <div class="mt-4 h-1 w-16 mx-auto bg-gradient-to-r from-blue-400 to-purple-600"></div>
-                            </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Building The Future Through <span class="text-cyan-300 relative z-10 px-1">Strategic</span> Investments</h1>
+                    <p class="text-xl mb-8 text-blue-100 max-w-lg">NEPHTALI AWE HOLDING is a diversified conglomerate with operations across energy, mining, aviation, and construction sectors.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#companies" class="btn-gradient px-8 py-3 rounded-lg font-semibold text-white hover:shadow-lg transition flex items-center justify-center">
+                            <span>Our Companies</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#contact" class="border-2 border-white/50 text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 hover:border-white transition flex items-center justify-center">
+                            <i class="fas fa-envelope mr-2"></i>
+                            <span>Contact Us</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Added stats cards for visual appeal -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-12">
+                        <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg">
+                            <p class="text-3xl font-bold text-white">15+</p>
+                            <p class="text-blue-200 text-sm">Years Experience</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg">
+                            <p class="text-3xl font-bold text-white">4</p>
+                            <p class="text-blue-200 text-sm">Major Industries</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-4 rounded-lg sm:col-span-1 col-span-2">
+                            <p class="text-3xl font-bold text-white">12+</p>
+                            <p class="text-blue-200 text-sm">Countries</p>
                         </div>
                     </div>
-                    <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-1/2 h-2 bg-blue-400 rounded-full blur-md opacity-60"></div>
                 </div>
-                
-                <!-- Floating 3D Shapes -->
-                <div class="absolute -left-10 top-1/4 w-16 h-16">
-                    <div class="floating-cube h-full w-full">
-                        <canvas id="cubeCanvas" class="h-full w-full"></canvas>
+                <div class="md:w-1/2 relative" data-aos="fade-left">
+                    <div class="floating">
+                        <img src="dg.png" alt="NEPHTALI AWE HOLDING" class="rounded-xl shadow-2xl border-4 border-white/20 hover-scale">
                     </div>
+                    <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-blue-500 rounded-full filter blur-xl opacity-30 -z-10"></div>
                 </div>
-                
-                <div class="absolute -right-10 bottom-1/3 w-20 h-20">
-                    <div class="floating-pyramid h-full w-full">
-                        <canvas id="pyramidCanvas" class="h-full w-full"></canvas>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Scroll Down Indicator -->
-            <div class="scroll-down lg:hidden">
-                <a href="#features" class="text-blue-400 hover:text-purple-400 transition-colors duration-300">
-                    <i class="fas fa-chevron-down text-2xl"></i>
-                </a>
             </div>
         </div>
     </section>
-    
-    <!-- Tech Features Section -->
-    <section id="features" class="py-20 relative overflow-hidden px-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 tech-font">
-                    <span class="gradient-text">Technological</span> Capabilities
-                </h2>
-                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
-                    Leveraging the latest advancements to create immersive experiences that engage and captivate.
-                </p>
+
+    <!-- About Section - Completely redesigned with modern layout and improved background -->
+    <section id="about" class="py-24 bg-gradient-to-br from-white to-blue-50 relative overflow-hidden">
+        <!-- Background elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 right-0 w-full h-full">
+                <div class="absolute top-1/4 -right-20 w-96 h-96 bg-blue-200 rounded-full filter blur-3xl opacity-20"></div>
+                <div class="absolute bottom-1/4 -left-20 w-96 h-96 bg-indigo-200 rounded-full filter blur-3xl opacity-20"></div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">About <span class="text-blue-600">NEPHTALI AWE HOLDING</span></h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto">A global conglomerate with a diverse portfolio of businesses across multiple industries, committed to excellence and sustainable growth.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="feature-panel holographic p-8 rounded-2xl transition-all duration-700 hover:transform hover:scale-105">
-                    <div class="relative">
-                        <div class="absolute -left-2 -top-2 w-12 h-12 bg-blue-500 rounded-full opacity-20 blur-sm"></div>
-                        <div class="relative flex items-center">
-                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-vr-cardboard text-xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold gradient-text tech-font">XR Integration</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mt-6 mb-6">
-                        Seamless mixed reality experiences combining VR, AR, and spatial computing for unparalleled immersion.
-                    </p>
-                    <div class="relative h-40 mt-6 rounded-xl overflow-hidden">
-                        <canvas id="xrCanvas" class="w-full h-full bg-black/30"></canvas>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-20 h-20 border-2 border-blue-400/50 rounded-full animate-ping opacity-30"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Feature 2 -->
-                <div class="feature-panel holographic p-8 rounded-2xl transition-all duration-700 delay-100 hover:transform hover:scale-105">
-                    <div class="relative">
-                        <div class="absolute -left-2 -top-2 w-12 h-12 bg-purple-500 rounded-full opacity-20 blur-sm"></div>
-                        <div class="relative flex items-center">
-                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-brain text-xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold gradient-text tech-font">AI Interaction</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mt-6 mb-6">
-                        Smart adaptive interfaces powered by machine learning that evolve with user behavior and preferences.
-                    </p>
-                    <div class="relative h-40 mt-6 rounded-xl overflow-hidden">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-500 rounded-full flex items-center justify-center pulse">
-                                <i class="fas fa-atom text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="absolute inset-0">
-                            <div class="grid grid-cols-5 grid-rows-5 h-full w-full">
-                                <!-- Grid for neural network effect -->
-                                <?php for($i=0; $i<25; $i++): ?>
-                                <div class="border border-gray-700 relative">
-                                    <div class="absolute inset-0 bg-blue-500/10 animate-pulse" style="animation-delay: <?= $i*0.1 ?>s; opacity: 0;"></div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Our Vision & Mission</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-eye text-blue-600"></i>
                                 </div>
-                                <?php endfor; ?>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-semibold text-gray-900">Vision</h4>
+                                <p class="mt-2 text-gray-600">To be a global leader in our core sectors, driving innovation and creating sustainable value for all stakeholders.</p>
                             </div>
                         </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-bullseye text-blue-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-semibold text-gray-900">Mission</h4>
+                                <p class="mt-2 text-gray-600">To build and operate world-class businesses that deliver exceptional value, while maintaining the highest standards of integrity, safety, and environmental responsibility.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-gem text-blue-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-semibold text-gray-900">Values</h4>
+                                <p class="mt-2 text-gray-600">Excellence, Integrity, Innovation, Sustainability, and Respect for all stakeholders form the foundation of our corporate culture.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <a href="#companies" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition">
+                            Discover Our Companies
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
                     </div>
                 </div>
                 
-                <!-- Feature 3 -->
-                <div class="feature-panel holographic p-8 rounded-2xl transition-all duration-700 delay-200 hover:transform hover:scale-105">
+                <div class="order-1 md:order-2" data-aos="fade-left">
                     <div class="relative">
-                        <div class="absolute -left-2 -top-2 w-12 h-12 bg-pink-500 rounded-full opacity-20 blur-sm"></div>
-                        <div class="relative flex items-center">
-                            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-blue-600 rounded-lg flex items-center justify-center mr-4">
-                                <i class="fas fa-project-diagram text-xl"></i>
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Corporate Building" class="rounded-lg shadow-xl hover-scale">
+                        
+                        <!-- Floating stats card -->
+                        <div class="absolute -bottom-10 -right-10 bg-white rounded-lg shadow-xl p-6 max-w-xs" data-aos="fade-up" data-aos-delay="300">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-lg font-bold text-gray-900">Global Presence</h4>
+                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-globe text-blue-600"></i>
+                                </div>
                             </div>
-                            <h3 class="text-2xl font-bold gradient-text tech-font">Blockchain Ready</h3>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 mt-6 mb-6">
-                        Decentralized architectures and NFT integration for ownership, authentication, and new economic models.
-                    </p>
-                    <div class="relative h-40 mt-6 rounded-xl overflow-hidden">
-                        <div class="absolute inset-0">
-                            <div class="grid grid-cols-6 gap-1 h-full w-full p-1">
-                                <!-- Blockchain blocks animation -->
-                                <?php for($i=0; $i<36; $i++): ?>
-                                <div class="bg-gray-800/50 border border-gray-700 rounded-sm animate-pulse" style="animation-delay: <?= $i*0.05 ?>s;"></div>
-                                <?php endfor; ?>
-                            </div>
-                        </div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-16 h-16 rotate-x">
-                                <div class="w-full h-full bg-gradient-to-br from-blue-600 to-pink-500 flex items-center justify-center">
-                                    <i class="fas fa-cube text-xl"></i>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-3xl font-bold text-blue-600">12+</p>
+                                    <p class="text-sm text-gray-600">Countries</p>
+                                </div>
+                                <div>
+                                    <p class="text-3xl font-bold text-blue-600">25+</p>
+                                    <p class="text-sm text-gray-600">Offices</p>
                                 </div>
                             </div>
                         </div>
@@ -460,837 +338,595 @@
             </div>
         </div>
     </section>
-    
-    <!-- 3D Showcase Section -->
-    <section id="portfolio" class="py-20 relative overflow-hidden px-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 tech-font">
-                    <span class="gradient-text">Immersive</span> Showcase
-                </h2>
-                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
-                    Our portfolio of cutting-edge projects that push the boundaries of digital interaction.
-                </p>
+
+    <!-- Companies Section - Redesigned with modern layout and improved background -->
+    <section id="companies" class="py-24 bg-gradient-to-br from-blue-50 to-indigo-50 relative overflow-hidden">
+        <!-- Background elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 right-0 w-full h-full">
+                <div class="absolute top-1/4 -right-20 w-96 h-96 bg-blue-200 rounded-full filter blur-3xl opacity-20"></div>
+                <div class="absolute bottom-1/4 -left-20 w-96 h-96 bg-indigo-200 rounded-full filter blur-3xl opacity-20"></div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our <span class="text-blue-600">Portfolio Companies</span></h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto">NEPHTALI AWE HOLDING's diversified portfolio spans across key sectors of the economy, each company a leader in its respective industry.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="feature-panel holographic rounded-2xl overflow-hidden transition-all duration-700 delay-75 hover:transform hover:scale-105">
-                    <div class="relative h-64">
-                        <canvas id="project1Canvas" class="absolute inset-0 w-full h-full bg-gray-900"></canvas>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <h3 class="text-2xl font-bold mb-1">Quantum Interface</h3>
-                            <span class="text-sm text-blue-400">VR Control System</span>
-                        </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- UHURU ENERGY -->
+                <div class="company-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="h-48 bg-gradient-to-r from-blue-900 to-blue-700 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center opacity-20"></div>
+                        <i class="fas fa-bolt text-white text-6xl relative z-10"></i>
                     </div>
                     <div class="p-6">
-                        <p class="text-gray-300 mb-4">A revolutionary interface system using quantum computing principles for intuitive interactions.</p>
-                        <button class="text-blue-400 font-medium flex items-center group">
-                            <span>Explore Project</span>
-                            <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all duration-300"></i>
-                        </button>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-900">Uhuru Energy</h3>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-semibold rounded-full">Energy</span>
+                        </div>
+                        <p class="text-gray-700 mb-4">Leading renewable energy company focused on solar, wind, and hydroelectric power generation across Africa.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-md">Renewable</span>
+                            <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-md">Solar</span>
+                            <span class="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-md">Wind</span>
+                        </div>
+                        <a href="uhuru-energy.html" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition">
+                            Learn more
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
                     </div>
                 </div>
                 
-                <!-- Project 2 -->
-                <div class="feature-panel holographic rounded-2xl overflow-hidden transition-all duration-700 delay-150 hover:transform hover:scale-105">
-                    <div class="relative h-64">
-                        <canvas id="project2Canvas" class="absolute inset-0 w-full h-full bg-gray-900"></canvas>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <h3 class="text-2xl font-bold mb-1">Neon Metaverse</h3>
-                            <span class="text-sm text-purple-400">Digital Cityscape</span>
-                        </div>
+                <!-- SKYLINE AVIATION -->
+                <div class="company-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="h-48 bg-gradient-to-r from-indigo-900 to-indigo-700 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80')] bg-cover bg-center opacity-20"></div>
+                        <i class="fas fa-plane text-white text-6xl relative z-10"></i>
                     </div>
                     <div class="p-6">
-                        <p class="text-gray-300 mb-4">A cyberpunk-inspired virtual world with blockchain-based property ownership.</p>
-                        <button class="text-purple-400 font-medium flex items-center group">
-                            <span>Explore Project</span>
-                            <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all duration-300"></i>
-                        </button>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-900">Skyline Aviation</h3>
+                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-semibold rounded-full">Aviation</span>
+                        </div>
+                        <p class="text-gray-700 mb-4">Premium aviation services including commercial flights, cargo transport, and private jet charters.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs rounded-md">Commercial</span>
+                            <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs rounded-md">Cargo</span>
+                            <span class="px-2 py-1 bg-indigo-50 text-indigo-700 text-xs rounded-md">Charter</span>
+                        </div>
+                        <a href="skyline-aviation.html" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 transition">
+                            Learn more
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
                     </div>
                 </div>
                 
-                <!-- Project 3 -->
-                <div class="feature-panel holographic rounded-2xl overflow-hidden transition-all duration-700 delay-300 hover:transform hover:scale-105">
-                    <div class="relative h-64">
-                        <canvas id="project3Canvas" class="absolute inset-0 w-full h-full bg-gray-900"></canvas>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-6">
-                            <h3 class="text-2xl font-bold mb-1">Holo Nexus</h3>
-                            <span class="text-sm text-pink-400">AR Collaboration</span>
-                        </div>
+                <!-- ZENITH CONSTRUCTION -->
+                <div class="company-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="h-48 bg-gradient-to-r from-amber-800 to-amber-600 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1487958449943-2427e257866b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center opacity-20"></div>
+                        <i class="fas fa-building text-white text-6xl relative z-10"></i>
                     </div>
                     <div class="p-6">
-                        <p class="text-gray-300 mb-4">Mixed reality workspace enabling global teams to collaborate in 3D space.</p>
-                        <button class="text-pink-400 font-medium flex items-center group">
-                            <span>Explore Project</span>
-                            <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all duration-300"></i>
-                        </button>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-900">Zenith Construction</h3>
+                            <span class="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-semibold rounded-full">Construction</span>
+                        </div>
+                        <p class="text-gray-700 mb-4">Award-winning construction company specializing in commercial, residential, and infrastructure projects.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-amber-50 text-amber-700 text-xs rounded-md">Commercial</span>
+                            <span class="px-2 py-1 bg-amber-50 text-amber-700 text-xs rounded-md">Residential</span>
+                            <span class="px-2 py-1 bg-amber-50 text-amber-700 text-xs rounded-md">Infrastructure</span>
+                        </div>
+                        <a href="zenith-construction.html" class="inline-flex items-center text-amber-600 hover:text-amber-800 transition">
+                            Learn more
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
                     </div>
                 </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <button class="relative overflow-hidden group px-8 py-4 rounded-full font-medium text-lg bg-transparent border-2 border-blue-400 hover:border-purple-500 text-white transition-all duration-300 transform hover:scale-105">
-                    <span class="relative z-10">View All Projects</span>
-                    <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-all duration-500"></span>
-                </button>
-            </div>
-            
-            <!-- 3D Tech Visualization -->
-            <div class="mt-20 relative h-96 rounded-3xl overflow-hidden hologram-effect scanline noise">
-                <canvas id="techVizCanvas" class="absolute inset-0 w-full h-full"></canvas>
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="text-center p-8 max-w-2xl">
-                        <h3 class="text-3xl md:text-4xl font-bold mb-4 gradient-text tech-font">Tech Spectrum Analysis</h3>
-                        <p class="text-gray-300 mb-6">Real-time visualization of our technology stack and capabilities across multiple dimensions.</p>
-                        <div class="flex justify-center gap-4">
-                            <button class="px-6 py-2 rounded-full text-sm font-medium bg-blue-500/20 border border-blue-400/50 hover:bg-blue-500/30">XR</button>
-                            <button class="px-6 py-2 rounded-full text-sm font-medium bg-purple-500/20 border border-purple-400/50 hover:bg-purple-500/30">AI</button>
-                            <button class="px-6 py-2 rounded-full text-sm font-medium bg-pink-500/20 border border-pink-400/50 hover:bg-pink-500/30">Blockchain</button>
+                
+                <!-- HOREB MINING -->
+                <div class="company-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="h-48 bg-gradient-to-r from-gray-800 to-gray-600 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544531586-fde5298cdd40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center opacity-20"></div>
+                        <i class="fas fa-mountain text-white text-6xl relative z-10"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-900">Horeb Mining</h3>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-800 text-xs font-semibold rounded-full">Mining</span>
+                        </div>
+                        <p class="text-gray-700 mb-4">Specialized mining company focused on non-ferrous metal ores, quarrying, and mineral oil refining across Africa.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-gray-50 text-gray-700 text-xs rounded-md">Non-ferrous</span>
+                            <span class="px-2 py-1 bg-gray-50 text-gray-700 text-xs rounded-md">Quarrying</span>
+                            <span class="px-2 py-1 bg-gray-50 text-gray-700 text-xs rounded-md">Refining</span>
+                        </div>
+                        <a href="horeb-mining.html" class="inline-flex items-center text-gray-600 hover:text-gray-800 transition">
+                            Learn more
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- SION AVIATION -->
+                <div class="company-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="h-48 bg-gradient-to-r from-purple-900 to-purple-700 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80')] bg-cover bg-center opacity-20"></div>
+                        <i class="fas fa-plane text-white text-6xl relative z-10"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-900">Sion Aviation</h3>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-800 text-xs font-semibold rounded-full">Aviation</span>
+                        </div>
+                        <p class="text-gray-700 mb-4">Comprehensive aviation services including maintenance, passenger transport, freight, and transportation support.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-purple-50 text-purple-700 text-xs rounded-md">Maintenance</span>
+                            <span class="px-2 py-1 bg-purple-50 text-purple-700 text-xs rounded-md">Passenger</span>
+                            <span class="px-2 py-1 bg-purple-50 text-purple-700 text-xs rounded-md">Freight</span>
+                        </div>
+                        <a href="sion-aviation.html" class="inline-flex items-center text-purple-600 hover:text-purple-800 transition">
+                            Learn more
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Holding Company Info -->
+                <div class="company-card bg-gradient-to-br from-blue-900 to-blue-700 rounded-xl overflow-hidden shadow-md text-white glow" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="h-48 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center opacity-10"></div>
+                        <i class="fas fa-chess-queen text-white text-6xl relative z-10"></i>
+                    </div>
+                    <div class="p-6 relative z-10">
+                        <h3 class="text-xl font-bold mb-2">NEPHTALI AWE HOLDING</h3>
+                        <div class="flex items-center text-blue-200 mb-4">
+                            <i class="fas fa-chess-board mr-2"></i>
+                            <span>Strategic Investments</span>
+                        </div>
+                        <p class="mb-4">Our holding company provides strategic direction, financial oversight, and operational support to all our portfolio companies.</p>
+                        <div class="bg-blue-800/50 p-4 rounded-lg backdrop-blur-sm">
+                            <h4 class="font-semibold mb-2">Key Advantages:</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-300 mt-1 mr-2"></i>
+                                    <span>Strategic synergies across portfolio</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-300 mt-1 mr-2"></i>
+                                    <span>Shared best practices</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-300 mt-1 mr-2"></i>
+                                    <span>Centralized financial management</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- 3D Performance Stats -->
-    <section class="py-20 relative overflow-hidden px-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="holographic rounded-3xl p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl md:text-5xl font-bold mb-6 tech-font">
-                        <span class="gradient-text">Performance</span> Metrics
-                    </h2>
-                    <p class="text-xl text-gray-300 mb-8">
-                        Our solutions deliver measurable results across all key performance indicators.
-                    </p>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div>
-                            <div class="text-4xl font-bold gradient-text mb-2 tech-font">300%</div>
-                            <p class="text-gray-400">User Engagement</p>
-                        </div>
-                        <div>
-                            <div class="text-4xl font-bold gradient-text mb-2 tech-font">1.2s</div>
-                            <p class="text-gray-400">Avg. Load Time</p>
-                        </div>
-                        <div>
-                            <div class="text-4xl font-bold gradient-text mb-2 tech-font">99.9%</div>
-                            <p class="text-gray-400">Uptime</p>
-                        </div>
-                        <div>
-                            <div class="text-4xl font-bold gradient-text mb-2 tech-font">4.8/5</div>
-                            <p class="text-gray-400">Client Satisfaction</p>
-                        </div>
-                    </div>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-gradient-to-r from-blue-900 to-blue-700 text-white relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 right-0 w-full h-full">
+                <div class="absolute top-1/4 -right-20 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl opacity-20"></div>
+                <div class="absolute top-1/2 left-1/4 w-80 h-80 bg-indigo-500 rounded-full filter blur-3xl opacity-20"></div>
+                <div class="absolute bottom-1/4 -left-20 w-96 h-96 bg-blue-400 rounded-full filter blur-3xl opacity-20"></div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-5xl font-bold mb-2">5</div>
+                    <div class="text-blue-200 uppercase text-sm tracking-wider font-medium">Portfolio Companies</div>
                 </div>
-                
-                <div class="h-64 md:h-96 relative">
-                    <canvas id="statsCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-5xl font-bold mb-2">4</div>
+                    <div class="text-blue-200 uppercase text-sm tracking-wider font-medium">Key Industries</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-5xl font-bold mb-2">15+</div>
+                    <div class="text-blue-200 uppercase text-sm tracking-wider font-medium">Years Experience</div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-5xl font-bold mb-2">1000+</div>
+                    <div class="text-blue-200 uppercase text-sm tracking-wider font-medium">Employees</div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Contact Section with 3D Form -->
-    <section id="contact" class="py-20 relative overflow-hidden px-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-bold mb-4 tech-font">
-                    <span class="gradient-text">Ready to</span> Transform?
-                </h2>
-                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
-                    Let's discuss how we can create something extraordinary together.
-                </p>
+
+    <!-- Contact Section - Modernized with improved background for better contrast -->
+    <section id="contact" class="py-24 bg-gradient-to-br from-blue-50 to-indigo-100 relative overflow-hidden">
+        <!-- Background elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 right-0 w-full h-full">
+                <div class="absolute top-1/4 -right-20 w-96 h-96 bg-blue-300 rounded-full filter blur-3xl opacity-15"></div>
+                <div class="absolute top-1/2 left-1/4 w-80 h-80 bg-indigo-300 rounded-full filter blur-3xl opacity-15"></div>
+                <div class="absolute bottom-1/4 -left-20 w-96 h-96 bg-blue-200 rounded-full filter blur-3xl opacity-15"></div>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Get in <span class="text-blue-600">Touch</span></h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-700 max-w-3xl mx-auto">Connect with NEPHTALI AWE HOLDING for business inquiries, partnership opportunities, or to learn more about our portfolio companies.</p>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div class="holographic rounded-3xl p-8 md:p-12 relative overflow-hidden">
-                    <form class="space-y-6 relative z-10">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
-                            <input type="text" id="name" class="w-full px-5 py-3 bg-gray-900 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter your name">
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-xl" data-aos="fade-right">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-8 border-b border-gray-200 pb-4">Headquarters Information</h3>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white mt-1">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div class="ml-6">
+                                <h4 class="text-lg font-medium text-gray-900">Address</h4>
+                                <p class="mt-2 text-gray-600">NEPHTALI AWE HOLDING Tower<br>Central Business District<br>Lagos, Nigeria</p>
+                            </div>
                         </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
-                            <input type="email" id="email" class="w-full px-5 py-3 bg-gray-900 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your@email.com">
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white mt-1">
+                                <i class="fas fa-phone-alt text-xl"></i>
+                            </div>
+                            <div class="ml-6">
+                                <h4 class="text-lg font-medium text-gray-900">Phone</h4>
+                                <p class="mt-2 text-gray-600">+234 1 700 0000 (Main)<br>+234 1 700 0001 (Investor Relations)</p>
+                            </div>
                         </div>
-                        <div>
-                            <label for="project" class="block text-sm font-medium text-gray-300 mb-2">Project Type</label>
-                            <select id="project" class="w-full px-5 py-3 bg-gray-900 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                <option>Select project type</option>
-                                <option>XR Experience</option>
-                                <option>AI Integration</option>
-                                <option>Web3 Platform</option>
-                                <option>Custom Solution</option>
-                            </select>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white mt-1">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div class="ml-6">
+                                <h4 class="text-lg font-medium text-gray-900">Email</h4>
+                                <p class="mt-2 text-gray-600">info@nephtaliaweholding.com<br>investor.relations@nephtaliaweholding.com</p>
+                            </div>
                         </div>
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Project Details</label>
-                            <textarea id="message" rows="4" class="w-full px-5 py-3 bg-gray-900 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tell us about your project..."></textarea>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white mt-1">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                            <div class="ml-6">
+                                <h4 class="text-lg font-medium text-gray-900">Business Hours</h4>
+                                <p class="mt-2 text-gray-600">Monday - Friday: 8:00 AM - 5:00 PM<br>Saturday - Sunday: Closed</p>
+                            </div>
                         </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 transform hover:scale-105">
-                            Send Message
-                        </button>
-                    </form>
-                    <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
-                    <div class="absolute -top-20 -left-20 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
-                </div>
-                
-                <div class="relative">
-                    <div class="h-full w-full rounded-3xl overflow-hidden">
-                        <canvas id="contactCanvas" class="h-full w-full bg-gray-900"></canvas>
                     </div>
-                    <div class="absolute bottom-8 left-8 right-8 p-6 bg-black/70 backdrop-filter backdrop-blur-sm rounded-xl border border-gray-700">
-                        <h3 class="text-xl font-bold mb-2 gradient-text tech-font">Connect With Us</h3>
-                        <p class="text-gray-300 mb-4">We're available across all major platforms and networks.</p>
+                    
+                    <!-- Social Media Links -->
+                    <div class="mt-10 pt-6 border-t border-gray-200">
+                        <h4 class="text-lg font-medium text-gray-900 mb-4">Connect With Us</h4>
                         <div class="flex space-x-4">
-                            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-blue-400 rounded-full flex items-center justify-center transition-all duration-300">
+                            <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-purple-400 rounded-full flex items-center justify-center transition-all duration-300">
-                                <i class="fab fa-discord"></i>
+                            <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                                <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-pink-400 rounded-full flex items-center justify-center transition-all duration-300">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition-all duration-300">
-                                <i class="fab fa-telegram"></i>
+                            <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                                <i class="fab fa-instagram"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="py-12 border-t border-gray-800 relative overflow-hidden px-4">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                <div>
-                    <h4 class="text-xl font-bold gradient-text tech-font mb-4">NEBULA NEXUS</h4>
-                    <p class="text-gray-400 mb-6">Pushing the boundaries of digital experience through immersive technology.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-purple-400 transition-colors duration-300">
-                            <i class="fab fa-discord"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors duration-300">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-blue-600 transition-colors duration-300">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <h5 class="text-lg font-bold text-white mb-4">Services</h5>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">XR Development</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">AI Integration</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Web3 Solutions</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Immersive Design</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Tech Consulting</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="text-lg font-bold text-white mb-4">Company</h5>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Careers</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Case Studies</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition-colors duration-300">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="text-lg font-bold text-white mb-4">Newsletter</h5>
-                    <p class="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and insights.</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Your email" class="px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent w-full">
-                        <button type="submit" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-r-lg transition-all duration-300">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
+                
+                <!-- Contact Form -->
+                <div class="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-xl" data-aos="fade-left">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-8 border-b border-gray-200 pb-4">Send Us a Message</h3>
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-user text-gray-400"></i>
+                                    </div>
+                                    <input type="text" id="name" name="name" class="pl-10 block w-full rounded-lg border-gray-200 border py-3 px-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" placeholder="John Doe">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-envelope text-gray-400"></i>
+                                    </div>
+                                    <input type="email" id="email" name="email" class="pl-10 block w-full rounded-lg border-gray-200 border py-3 px-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" placeholder="john@example.com">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-gray-700 mb-1">Company (Optional)</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-building text-gray-400"></i>
+                                </div>
+                                <input type="text" id="company" name="company" class="pl-10 block w-full rounded-lg border-gray-200 border py-3 px-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" placeholder="Your Company Ltd">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject *</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-tag text-gray-400"></i>
+                                </div>
+                                <select id="subject" name="subject" class="pl-10 block w-full rounded-lg border-gray-200 border py-3 px-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                    <option>General Inquiry</option>
+                                    <option>Investor Relations</option>
+                                    <option>Business Partnership</option>
+                                    <option>Media Inquiry</option>
+                                    <option>Career Opportunities</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+                            <div class="relative">
+                                <div class="absolute top-3 left-0 pl-3 flex items-start pointer-events-none">
+                                    <i class="fas fa-comment-alt text-gray-400"></i>
+                                </div>
+                                <textarea id="message" name="message" rows="4" class="pl-10 block w-full rounded-lg border-gray-200 border py-3 px-4 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" placeholder="Your message here..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 flex justify-center py-3 px-6 rounded-lg shadow-lg text-lg font-medium text-white hover:shadow-xl transition-all duration-300">
+                                <i class="fas fa-paper-plane mr-2"></i> Send Message
+                            </button>
+                        </div>
+                        
+                        <p class="text-sm text-gray-500 text-center mt-4">* Required fields</p>
                     </form>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 Nebula Nexus. All rights reserved.</p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-500 hover:text-blue-400 text-sm transition-colors duration-300">Privacy Policy</a>
-                    <a href="#" class="text-gray-500 hover:text-blue-400 text-sm transition-colors duration-300">Terms of Service</a>
-                    <a href="#" class="text-gray-500 hover:text-blue-400 text-sm transition-colors duration-300">Cookies</a>
-                </div>
+        </div>
+    </section>
+
+    <!-- Footer - Modernized with glassmorphism effects -->
+    <footer class="bg-gradient-to-br from-gray-900 to-blue-900 text-white pt-20 pb-10 relative overflow-hidden">
+        <!-- Background elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 right-0 w-full h-full">
+                <div class="absolute top-1/4 -right-20 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl opacity-10"></div>
+                <div class="absolute top-1/2 left-1/4 w-80 h-80 bg-indigo-500 rounded-full filter blur-3xl opacity-10"></div>
+                <div class="absolute bottom-1/4 -left-20 w-96 h-96 bg-blue-400 rounded-full filter blur-3xl opacity-10"></div>
             </div>
         </div>
         
-        <!-- Floating 3D Sphere -->
-        <div class="absolute -bottom-20 -right-20 w-40 h-40">
-            <canvas id="footerSphereCanvas" class="w-full h-full"></canvas>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Logo and company description -->
+            <div class="flex flex-col md:flex-row justify-between items-start mb-16">
+                <div class="mb-10 md:mb-0 md:max-w-sm">
+                    <h2 class="text-2xl font-bold text-white mb-4">NEPHTALI AWE <span class="text-blue-400">HOLDING</span></h2>
+                    <p class="text-gray-300 mb-6 leading-relaxed">A diversified conglomerate with strategic investments across key sectors of the African economy, driving innovation and sustainable growth.</p>
+                    <div class="flex space-x-4">
+                        
+                        <a href="#" class="w-10 h-10 bg-blue-800/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-800/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-800/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-800/50 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Footer navigation columns -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-16">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-6 text-blue-300">Quick Links</h3>
+                        <ul class="space-y-3">
+                            <li>
+                                <a href="#home" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>Home</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#about" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>About Us</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#companies" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>Our Companies</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#contact" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>Contact</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold mb-6 text-blue-300">Our Companies</h3>
+                        <ul class="space-y-3">
+                            <li>
+                                <a href="#" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>Uhuru Energy</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>Skyline Aviation</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>Zenith Construction</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>Horeb Mining</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-semibold mb-6 text-blue-300">Legal</h3>
+                        <ul class="space-y-3">
+                            <li>
+                                <a href="#" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>Privacy Policy</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>Terms of Service</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>Cookie Policy</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-gray-300 hover:text-white transition-all duration-300 flex items-center">
+                                    <i class="fas fa-chevron-right text-xs mr-2 text-blue-400"></i>
+                                    <span>Investor Relations</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright section with glassmorphism effect -->
+            <div class="border-t border-blue-800/50 pt-8 mt-8">
+                <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-300 text-sm mb-4 md:mb-0"> 2025 <span class="text-blue-300">NEPHTALI AWE HOLDING</span>. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        
+                        <a href="#top" class="text-blue-300 hover:text-white text-sm transition-all duration-300 flex items-center">
+                            <span class="mr-1">Back to top</span>
+                            <i class="fas fa-arrow-up text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
-    
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Initialize Vanta.js background
-        VANTA.GLOBE({
-            el: "#vanta-bg",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x5773ff,
-            backgroundColor: 0x0a0a12,
-            size: 0.8
+        // Initialize AOS animation library
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
         });
         
-        // Initialize Three.js 3D models
-        document.addEventListener('DOMContentLoaded', function() {
-            // Torus in Hero Section
-            const torusCanvas = document.getElementById('torusCanvas');
-            const torusScene = new THREE.Scene();
-            const torusCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const torusRenderer = new THREE.WebGLRenderer({ 
-                canvas: torusCanvas, 
-                alpha: true,
-                antialias: true 
-            });
-            
-            const torusGeometry = new THREE.TorusGeometry(1, 0.4, 16, 100);
-            const torusMaterial = new THREE.MeshBasicMaterial({ 
-                color: 0x5773ff,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.8
-            });
-            const torus = new THREE.Mesh(torusGeometry, torusMaterial);
-            torusScene.add(torus);
-            
-            torusCamera.position.z = 3;
-            
-            // Cube in Hero Section
-            const cubeCanvas = document.getElementById('cubeCanvas');
-            const cubeScene = new THREE.Scene();
-            const cubeCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const cubeRenderer = new THREE.WebGLRenderer({ 
-                canvas: cubeCanvas, 
-                alpha: true,
-                antialias: true 
-            });
-            
-            const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-            const cubeMaterial = new THREE.MeshBasicMaterial({ 
-                color: 0xff007a,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.6
-            });
-            const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-            cubeScene.add(cube);
-            
-            cubeCamera.position.z = 3;
-            
-            // Pyramid in Hero Section
-            const pyramidCanvas = document.getElementById('pyramidCanvas');
-            const pyramidScene = new THREE.Scene();
-            const pyramidCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const pyramidRenderer = new THREE.WebGLRenderer({ 
-                canvas: pyramidCanvas, 
-                alpha: true,
-                antialias: true 
-            });
-            
-            const pyramidGeometry = new THREE.ConeGeometry(0.8, 1.5, 4);
-            const pyramidMaterial = new THREE.MeshBasicMaterial({ 
-                color: 0x00f0ff,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.6
-            });
-            const pyramid = new THREE.Mesh(pyramidGeometry, pyramidMaterial);
-            pyramid.rotation.y = Math.PI / 4;
-            pyramidScene.add(pyramid);
-            
-            pyramidCamera.position.z = 3;
-            
-            // XR Canvas in Features
-            const xrCanvas = document.getElementById('xrCanvas');
-            const xrScene = new THREE.Scene();
-            const xrCamera = new THREE.PerspectiveCamera(75, 2, 0.1, 1000);
-            const xrRenderer = new THREE.WebGLRenderer({ 
-                canvas: xrCanvas, 
-                alpha: true,
-                antialias: true 
-            });
-            
-            const xrPointsGeometry = new THREE.BufferGeometry();
-            const xrVertices = [];
-            for (let i = 0; i < 1000; i++) {
-                xrVertices.push(
-                    Math.random() * 2 - 1,
-                    Math.random() * 2 - 1,
-                    Math.random() * 2 - 1
-                );
-            }
-            xrPointsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(xrVertices, 3));
-            const xrPointsMaterial = new THREE.PointsMaterial({
-                color: 0x5773ff,
-                size: 0.02,
-                transparent: true,
-                opacity: 0.8
-            });
-            const xrPoints = new THREE.Points(xrPointsGeometry, xrPointsMaterial);
-            xrScene.add(xrPoints);
-            
-            xrCamera.position.z = 2;
-            xrRenderer.setSize(xrCanvas.width, xrCanvas.height);
-            
-            // Project 1 Canvas
-            const project1Canvas = document.getElementById('project1Canvas');
-            const project1Scene = new THREE.Scene();
-            const project1Camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const project1Renderer = new THREE.WebGLRenderer({ 
-                canvas: project1Canvas, 
-                alpha: true,
-                antialias: true 
-            });
-            
-            // Create a grid of points for project 1
-            const project1Geometry = new THREE.BufferGeometry();
-            const project1Vertices = [];
-            const gridSize = 10;
-            
-            for (let i = 0; i < gridSize; i++) {
-                for (let j = 0; j < gridSize; j++) {
-                    project1Vertices.push(
-                        (i - gridSize/2) * 0.1,
-                        (j - gridSize/2) * 0.1,
-                        0
-                    );
-                }
-            }
-            
-            project1Geometry.setAttribute('position', new THREE.Float32BufferAttribute(project1Vertices, 3));
-            const project1Material = new THREE.PointsMaterial({
-                color: 0x00f0ff,
-                size: 0.05,
-                sizeAttenuation: true
-            });
-            const project1Points = new THREE.Points(project1Geometry, project1Material);
-            project1Scene.add(project1Points);
-            
-            project1Camera.position.z = 2;
-            project1Renderer.setSize(project1Canvas.width, project1Canvas.height);
-            
-            // Project 2 Canvas
-            const project2Canvas = document.getElementById('project2Canvas');
-            const project2Scene = new THREE.Scene();
-            const project2Camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const project2Renderer = new THREE.WebGLRenderer({ 
-                canvas: project2Canvas, 
-                alpha: true,
-                antialias: true 
-            });
-            
-            // Create a wireframe city for project 2
-            const project2Group = new THREE.Group();
-            
-            for (let i = 0; i < 20; i++) {
-                const height = Math.random() * 0.5 + 0.2;
-                const buildingGeometry = new THREE.BoxGeometry(0.1, height, 0.1);
-                const buildingMaterial = new THREE.MeshBasicMaterial({
-                    color: 0x8a2be2,
-                    wireframe: true
-                });
-                const building = new THREE.Mesh(buildingGeometry, buildingMaterial);
-                building.position.x = (Math.random() - 0.5) * 2;
-                building.position.z = (Math.random() - 0.5) * 2;
-                building.position.y = height / 2;
-                project2Group.add(building);
-            }
-            
-            project2Scene.add(project2Group);
-            project2Camera.position.z = 3;
-            project2Camera.position.y = 1;
-            project2Renderer.setSize(project2Canvas.width, project2Canvas.height);
-            
-            // Project 3 Canvas
-            const project3Canvas = document.getElementById('project3Canvas');
-            const project3Scene = new THREE.Scene();
-            const project3Camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const project3Renderer = new THREE.WebGLRenderer({ 
-                canvas: project3Canvas, 
-                alpha: true,
-                antialias: true 
-            });
-            
-            // Create a network of lines for project 3
-            const project3Group = new THREE.Group();
-            const project3Material = new THREE.LineBasicMaterial({ color: 0xff007a });
-            
-            for (let i = 0; i < 20; i++) {
-                const project3Geometry = new THREE.BufferGeometry();
-                const vertices = [];
-                vertices.push(
-                    Math.random() * 2 - 1,
-                    Math.random() * 2 - 1,
-                    Math.random() * 2 - 1
-                );
-                vertices.push(
-                    Math.random() * 2 - 1,
-                    Math.random() * 2 - 1,
-                    Math.random() * 2 - 1
-                );
-                project3Geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-                const line = new THREE.Line(project3Geometry, project3Material);
-                project3Group.add(line);
-            }
-            
-            project3Scene.add(project3Group);
-            project3Camera.position.z = 3;
-            project3Renderer.setSize(project3Canvas.width, project3Canvas.height);
-            
-            // Tech Viz Canvas
-            const techVizCanvas = document.getElementById('techVizCanvas');
-            const techVizScene = new THREE.Scene();
-            const techVizCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const techVizRenderer = new THREE.WebGLRenderer({ 
-                canvas: techVizCanvas, 
-                alpha: true,
-                antialias: true 
-            });
-            techVizRenderer.setSize(techVizCanvas.width, techVizCanvas.height);
-            
-            // Create a particle system for tech viz
-            const techVizParticles = 500;
-            const techVizPositions = new Float32Array(techVizParticles * 3);
-            const techVizColors = new Float32Array(techVizParticles * 3);
-            
-            for (let i = 0; i < techVizParticles; i++) {
-                techVizPositions[i * 3] = (Math.random() - 0.5) * 10;
-                techVizPositions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-                techVizPositions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.innerHTML = mobileMenu.classList.contains('hidden') ? 
+                '<i class="fas fa-bars text-xl"></i>' : 
+                '<i class="fas fa-times text-xl"></i>';
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
                 
-                techVizColors[i * 3] = Math.random() * 0.5 + 0.5; // R
-                techVizColors[i * 3 + 1] = Math.random() * 0.3;    // G
-                techVizColors[i * 3 + 2] = Math.random() * 0.5 + 0.5; // B
-            }
-            
-            const techVizGeometry = new THREE.BufferGeometry();
-            techVizGeometry.setAttribute('position', new THREE.BufferAttribute(techVizPositions, 3));
-            techVizGeometry.setAttribute('color', new THREE.BufferAttribute(techVizColors, 3));
-            
-            const techVizMaterial = new THREE.PointsMaterial({
-                size: 0.1,
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.8,
-                sizeAttenuation: true
-            });
-            
-            const techVizParticleSystem = new THREE.Points(techVizGeometry, techVizMaterial);
-            techVizScene.add(techVizParticleSystem);
-            
-            techVizCamera.position.z = 5;
-            
-            // Stats Canvas
-            const statsCanvas = document.getElementById('statsCanvas');
-            const statsScene = new THREE.Scene();
-            const statsCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const statsRenderer = new THREE.WebGLRenderer({ 
-                canvas: statsCanvas, 
-                alpha: true,
-                antialias: true 
-            });
-            statsRenderer.setSize(statsCanvas.width, statsCanvas.height);
-            
-            // Create data visualization
-            const statsGroup = new THREE.Group();
-            
-            // Create bars
-            const barHeights = [1.5, 2, 2.8, 1.8, 2.5];
-            const barColors = [0x00f0ff, 0x5773ff, 0xff007a, 0x8a2be2, 0x00ffaa];
-            
-            for (let i = 0; i < barHeights.length; i++) {
-                const barGeometry = new THREE.BoxGeometry(0.3, barHeights[i], 0.3);
-                const barMaterial = new THREE.MeshBasicMaterial({ color: barColors[i] });
-                const bar = new THREE.Mesh(barGeometry, barMaterial);
-                bar.position.x = (i - 2) * 0.8;
-                bar.position.y = barHeights[i] / 2;
-                statsGroup.add(bar);
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
                 
-                // Add connecting lines
-                if (i > 0) {
-                    const lineGeometry = new THREE.BufferGeometry();
-                    const lineVertices = [
-                        (i-1 - 2) * 0.8, barHeights[i-1], 0,
-                        (i - 2) * 0.8, barHeights[i], 0
-                    ];
-                    lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(lineVertices, 3));
-                    const lineMaterial = new THREE.LineBasicMaterial({
-                        color: 0xffffff,
-                        transparent: true,
-                        opacity: 0.4
-                    });
-                    const line = new THREE.Line(lineGeometry, lineMaterial);
-                    statsGroup.add(line);
-                }
-            }
-            
-            // Add base plane
-            const planeGeometry = new THREE.PlaneGeometry(5, 0.1);
-            const planeMaterial = new THREE.MeshBasicMaterial({
-                color: 0x444444,
-                side: THREE.DoubleSide
-            });
-            const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-            plane.rotation.x = Math.PI / 2;
-            plane.position.y = -0.05;
-            statsGroup.add(plane);
-            
-            statsScene.add(statsGroup);
-            statsCamera.position.z = 6;
-            statsCamera.position.y = 1;
-            statsCamera.lookAt(0, 1, 0);
-            
-            // Contact Canvas
-            const contactCanvas = document.getElementById('contactCanvas');
-            const contactScene = new THREE.Scene();
-            const contactCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const contactRenderer = new THREE.WebGLRenderer({ 
-                canvas: contactCanvas, 
-                alpha: true,
-                antialias: true 
-            });
-            
-            // Create glowing orbs with connections
-            const contactOrbs = [];
-            const orbPositions = [];
-            const orbColors = [0x00f0ff, 0x5773ff, 0xff007a, 0x8a2be2, 0x00ffaa];
-            
-            for (let i = 0; i < 5; i++) {
-                const orbGeometry = new THREE.SphereGeometry(0.3, 16, 16);
-                const orbMaterial = new THREE.MeshBasicMaterial({
-                    color: orbColors[i],
-                    transparent: true,
-                    opacity: 0.8
-                });
-                const orb = new THREE.Mesh(orbGeometry, orbMaterial);
-                
-                orb.position.x = (Math.random() - 0.5) * 4;
-                orb.position.y = (Math.random() - 0.5) * 2;
-                orb.position.z = (Math.random() - 0.5) * 4;
-                
-                orbPositions.push(new THREE.Vector3(
-                    orb.position.x,
-                    orb.position.y,
-                    orb.position.z
-                ));
-                
-                contactOrbs.push(orb);
-                contactScene.add(orb);
-            }
-            
-            // Add connecting lines
-            const lineGeometry = new THREE.BufferGeometry();
-            const lineVertices = [];
-            
-            for (let i = 0; i < orbPositions.length; i++) {
-                for (let j = i + 1; j < orbPositions.length; j++) {
-                    lineVertices.push(
-                        orbPositions[i].x, orbPositions[i].y, orbPositions[i].z,
-                        orbPositions[j].x, orbPositions[j].y, orbPositions[j].z
-                    );
-                }
-            }
-            
-            lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(lineVertices, 3));
-            const lineMaterial = new THREE.LineBasicMaterial({
-                color: 0xffffff,
-                transparent: true,
-                opacity: 0.2
-            });
-            const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
-            contactScene.add(lines);
-            
-            contactCamera.position.z = 8;
-            contactRenderer.setSize(contactCanvas.width, contactCanvas.height);
-            
-            // Footer Sphere
-            const footerSphereCanvas = document.getElementById('footerSphereCanvas');
-            const footerSphereScene = new THREE.Scene();
-            const footerSphereCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-            const footerSphereRenderer = new THREE.WebGLRenderer({ 
-                canvas: footerSphereCanvas, 
-                alpha: true,
-                antialias: true 
-            });
-            
-            const footerSphereGeometry = new THREE.SphereGeometry(1, 32, 32);
-            const footerSphereMaterial = new THREE.MeshBasicMaterial({
-                color: 0x00f0ff,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.4
-            });
-            const footerSphere = new THREE.Mesh(footerSphereGeometry, footerSphereMaterial);
-            footerSphereScene.add(footerSphere);
-            
-            footerSphereCamera.position.z = 3;
-            
-            // Intersection Observer for animated elements
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            
-            document.querySelectorAll('.feature-panel').forEach(panel => {
-                observer.observe(panel);
-            });
-            
-            // Animation loop
-            function animate() {
-                requestAnimationFrame(animate);
-                
-                // Rotate torus
-                torus.rotation.x += 0.01;
-                torus.rotation.y += 0.01;
-                torusRenderer.render(torusScene, torusCamera);
-                
-                // Rotate cube (slower)
-                cube.rotation.x += 0.005;
-                cube.rotation.y += 0.005;
-                cubeRenderer.render(cubeScene, cubeCamera);
-                
-                // Rotate pyramid (different axis)
-                pyramid.rotation.x += 0.007;
-                pyramid.rotation.z += 0.007;
-                pyramidRenderer.render(pyramidScene, pyramidCamera);
-                
-                // Animate XR points
-                xrPoints.rotation.y += 0.005;
-                xrRenderer.render(xrScene, xrCamera);
-                
-                // Animate project 1 points
-                project1Points.rotation.y += 0.01;
-                const positions = project1Points.geometry.attributes.position;
-                for (let i = 2; i < positions.count * 3; i += 3) {
-                    positions.array[i] = Math.sin(Date.now() * 0.001 + i) * 0.5;
-                }
-                positions.needsUpdate = true;
-                project1Renderer.render(project1Scene, project1Camera);
-                
-                // Animate project 2 buildings
-                project2Group.rotation.y += 0.005;
-                project2Renderer.render(project2Scene, project2Camera);
-                
-                // Animate project 3 lines
-                project3Group.rotation.y += 0.008;
-                project3Renderer.render(project3Scene, project3Camera);
-                
-                // Animate tech viz particles
-                techVizParticleSystem.rotation.y += 0.003;
-                techVizRenderer.render(techVizScene, techVizCamera);
-                
-                // Animate stats bars
-                statsGroup.rotation.y += 0.002;
-                statsRenderer.render(statsScene, statsCamera);
-                
-                // Animate contact orbs
-                contactOrbs.forEach((orb, i) => {
-                    orb.position.y = Math.sin(Date.now() * 0.001 + i) * 0.3;
-                    orb.scale.setScalar(1 + Math.sin(Date.now() * 0.001 + i) * 0.2);
-                });
-                contactRenderer.render(contactScene, contactCamera);
-                
-                // Rotate footer sphere
-                footerSphere.rotation.y += 0.01;
-                footerSphereRenderer.render(footerSphereScene, footerSphereCamera);
-            }
-            
-            animate();
-            
-            // Handle window resize
-            window.addEventListener('resize', function() {
-                // Adjust canvas sizes and camera aspects
-                const canvases = [
-                    { canvas: torusCanvas, renderer: torusRenderer },
-                    { canvas: cubeCanvas, renderer: cubeRenderer },
-                    { canvas: pyramidCanvas, renderer: pyramidRenderer },
-                    { canvas: xrCanvas, renderer: xrRenderer },
-                    { canvas: project1Canvas, renderer: project1Renderer },
-                    { canvas: project2Canvas, renderer: project2Renderer },
-                    { canvas: project3Canvas, renderer: project3Renderer },
-                    { canvas: techVizCanvas, renderer: techVizRenderer },
-                    { canvas: statsCanvas, renderer: statsRenderer },
-                    { canvas: contactCanvas, renderer: contactRenderer },
-                    { canvas: footerSphereCanvas, renderer: footerSphereRenderer }
-                ];
-                
-                canvases.forEach(item => {
-                    // For the hero section floating elements
-                    if ([torusCanvas, cubeCanvas, pyramidCanvas].includes(item.canvas)) {
-                        const parent = item.canvas.parentElement;
-                        const width = parent.offsetWidth;
-                        const height = parent.offsetHeight;
-                        
-                        item.canvas.width = width;
-                        item.canvas.height = height;
-                        item.renderer.setSize(width, height);
-                        
-                        // Update camera for new aspect ratio
-                        const camera = item === torusCanvas ? torusCamera : 
-                                      item === cubeCanvas ? cubeCamera : pyramidCamera;
-                        
-                        camera.aspect = width / height;
-                        camera.updateProjectionMatrix();
+                if (targetElement) {
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        menuBtn.innerHTML = '<i class="fas fa-bars text-xl"></i>';
                     }
                     
-                    // For other canvas elements with defined parents
-                    else if (item.canvas.parentElement) {
-                        const parent = item.canvas.parentElement;
-                        const width = parent.offsetWidth;
-                        const height = parent.offsetHeight;
-                        
-                        if (width > 0 && height > 0) {
-                            item.canvas.width = width;
-                            item.canvas.height = height;
-                            item.renderer.setSize(width, height);
-                            
-                            // Update camera for new aspect ratio
-                            let camera;
-                            if (item === xrCanvas) camera = xrCamera;
-                            else if (item === project1Canvas) camera = project1Camera;
-                            else if (item === project2Canvas) camera = project2Camera;
-                            else if (item === project3Canvas) camera = project3Camera;
-                            else if (item === techVizCanvas) camera = techVizCamera;
-                            else if (item === statsCanvas) camera = statsCamera;
-                            else if (item === contactCanvas) camera = contactCamera;
-                            else if (item === footerSphereCanvas) camera = footerSphereCamera;
-                            
-                            camera.aspect = width / height;
-                            camera.updateProjectionMatrix();
-                        }
-                    }
-                });
+                    // Scroll to target
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Highlight active navigation link
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
             });
             
-            // Trigger initial resize
-            window.dispatchEvent(new Event('resize'));
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
         });
+        
+        // Add floating animation to elements
+        function addFloatingAnimation() {
+            const elements = document.querySelectorAll('.floating');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
+        }
+        
+        window.addEventListener('load', addFloatingAnimation);
     </script>
-<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - <a href="https://enzostvs-deepsite.hf.space?remix=zaid3sa/zad" style="color: #fff;text-decoration: underline;" target="_blank" >🧬 Remix</a></p></body>
+</body>
 </html>
